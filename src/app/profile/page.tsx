@@ -13,6 +13,31 @@ import {
     AlertDialogTitle,
     AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
+
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+
+import {
+    Sheet,
+    SheetClose,
+    SheetContent,
+    SheetDescription,
+    SheetFooter,
+    SheetHeader,
+    SheetTitle,
+    SheetTrigger,
+} from "@/components/ui/sheet"
+
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardFooter,
+    CardHeader,
+    CardTitle,
+} from "@/components/ui/card"
+import { Progress } from "@/components/ui/progress"
+
 function Profil() {
     const user = {
         name: "mohammed",
@@ -20,10 +45,11 @@ function Profil() {
         professionalAccount: true,
         phone: "0606060606",
         adresse: "20 rue des rues, Arras 62790",
-        society: "MySociety2",
+        society: "REKAP&Co",
         employe: [
-            { id: 1, fistName: 'john', name: "Doe" },
-            { id: 2, fistName: 'jonny', name: "Poe" }
+            { id: 1, fistName: 'john', name: "Doe", email: "johnDoe@gmail.com" },
+            { id: 2, fistName: 'jonny', name: "Poe", email: "jonnyPoe@gmail.com" },
+            { id: 3, fistName: 'Emma', name: "Zoe", email: "EmmaZoe@gmail.com" }
         ]
     }
     return (
@@ -113,14 +139,82 @@ function Profil() {
                                         Employée
                                     </dt>
                                     <dd className="mt-1 text-sm flex text-gray-900 sm:mt-0 sm:col-span-2">
-                                        {user.employe.length}
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5 ml-2 cursor-pointer">
+                                    {user.employe.length}
+                                    <Sheet>
+
+
+                                        <SheetTrigger>  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5 ml-2 cursor-pointer">
                                             <path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
                                             <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                                        </svg>
+                                        </svg></SheetTrigger>
+                                        <SheetContent>
+                                            <SheetHeader>
+                                                <SheetTitle>Liste de mes employées </SheetTitle>
+                                                <SheetDescription>
+                                                    Certaines actions peuvent modifier le status de vos employées..
+                                                </SheetDescription>
+                                                {user.employe.map((group) => (
+                                                    <ul className='flex' key={group.id}>
+                                                        <li className='border-b-2 text-center'>{group.fistName} {group.name} / {group.email}</li>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5 m-1 cursor-pointer">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75" />
+                                                        </svg>
 
-                                    </dd>
-                                </div>
+                                                    </ul>
+                                                ))}
+                                            </SheetHeader>
+                                        </SheetContent>
+                                    </Sheet>
+                                </dd>
+
+                            </div>
+
+
+
+
+                            <div className='flex w-full flex-wrap justify-around'>
+                                <Card className='w-[200px]'>
+                                    <CardHeader className="pb-2">
+                                        <CardDescription>Contrat Signé </CardDescription>
+                                        <CardTitle className="text-4xl">56</CardTitle>
+                                    </CardHeader>
+                                    <CardContent>
+                                        <div className="text-xs text-muted-foreground">Total de contrat signé par la société {user.society}</div>
+                                    </CardContent>
+                                    <CardFooter>
+                                        <Progress value={25} aria-label="25% increase" />
+                                    </CardFooter>
+                                </Card>
+
+                                <Card className='w-[200px]'>
+                                    <CardHeader className="pb-2">
+                                        <CardDescription>Facture </CardDescription>
+                                        <CardTitle className="text-4xl">99</CardTitle>
+                                    </CardHeader>
+                                    <CardContent>
+                                        <div className="text-xs text-muted-foreground">la socitété {user.society} à 99 facture </div>
+                                    </CardContent>
+                                    <CardFooter>
+                                        <Progress value={50} aria-label="25% increase" />
+                                        <p>20 000€</p>
+                                    </CardFooter>
+                                </Card>
+
+                                <Card className='w-[200px]'>
+                                    <CardHeader className="pb-2">
+                                        <CardDescription>Total Facture </CardDescription>
+                                        <CardTitle className="text-4xl">18 658 €</CardTitle>
+                                    </CardHeader>
+                                    <CardContent>
+                                        <div className="text-xs text-muted-foreground">Vous avez généré 18 658 € avec vote société</div>
+                                    </CardContent>
+                                    <CardFooter>
+                                        <Progress value={80} aria-label="25% increase" />
+
+                                    </CardFooter>
+
+                                </Card>
+                            </div>
                             </>
                         }
 
